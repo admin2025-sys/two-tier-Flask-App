@@ -1,0 +1,39 @@
+version: "3.8"
+services:
+  flaskapp:
+    build:
+      context: .
+
+    container_name: flaskapp
+    ports:
+      - "5000:5000"
+    environment:
+      MYSQL_HOST: mysql
+      MYSQL_USER: root
+      MYSQL_PASSWORD: admin
+      MYSQL_DB: mydb
+    networks:
+      - two-tier
+    depends_on:
+      - mysql
+
+
+
+  mysql:
+    container_name: mysql
+    image: mysql:latest
+    ports:
+      - "3306:3306"
+    networks:
+      - two-tier
+    environment:
+      MYSQL_ROOT_PASSWORD: admin
+      MYSQL_DATABASE: mydb
+    volumes:
+      - my-data:/var/lib/mysql
+
+networks:
+  two-tier: {}
+
+volumes:
+  my-data: {}
