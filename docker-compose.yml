@@ -23,7 +23,7 @@ services:
     container_name: mysql
     image: mysql:latest
     ports:
-      - "3306:3306"
+      - "3307:3306"
     networks:
       - two-tier
     environment:
